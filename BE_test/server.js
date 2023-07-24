@@ -95,48 +95,48 @@ function initial() {
 Category.create({
   id: 1,
   category_name: "Thời Trang",
-  decription: "Danh mục thời trang",
+  description: "Danh mục thời trang",
   image: "https://down-vn.img.susercontent.com/file/687f3967b7c2fe6a134a2c11894eea4b_tn"
 })
 Category.create({
   id: 2,
   category_name: "Thiết bị điện tử",
-  decription: "Danh mục thiết bị điện tử",
+  description: "Danh mục thiết bị điện tử",
   image: "https://down-vn.img.susercontent.com/file/978b9e4cb61c611aaaf58664fae133c5_tn"
 })
 
 Category.create({
   id: 3,
   category_name: "Máy tính & Laptop",
-  decription: "Danh mục máy tính & Laptop",
+  description: "Danh mục máy tính & Laptop",
   image: "https://down-vn.img.susercontent.com/file/c3f3edfaa9f6dafc4825b77d8449999d_tn"
 })
 
 Category.create({
   id: 4,
   category_name: "Đồng hồ",
-  decription: "Danh mục đồng hồ",
+  description: "Danh mục đồng hồ",
   image: "https://down-vn.img.susercontent.com/file/86c294aae72ca1db5f541790f7796260_tn"
 })
 
 Category.create({
   id: 5,
   category_name: "Nhà sách",
-  decription: "Danh mục nhà sách",
+  description: "Danh mục nhà sách",
   image: "https://down-vn.img.susercontent.com/file/36013311815c55d303b0e6c62d6a8139_tn"
 })
 
 Category.create({
   id: 6,
   category_name: "Thiết bị gia dụng",
-  decription: "Danh mục thiết bị gia dụng",
+  description: "Danh mục thiết bị gia dụng",
   image: "https://down-vn.img.susercontent.com/file/7abfbfee3c4844652b4a8245e473d857_tn"
 })
 
 Category.create({
   id: 7,
   category_name: "Máy ảnh & Máy quay phim",
-  decription: "Danh mục máy ảnh và máy quay phim",
+  description: "Danh mục máy ảnh và máy quay phim",
   image: "https://down-vn.img.susercontent.com/file/ec14dd4fc238e676e43be2a911414d4d_tn"
 })
 
@@ -150,14 +150,14 @@ Category.create({
 Category.create({
   id: 9,
   category_name: "Túi xách",
-  decription: "Danh mục túi xách",
+  description: "Danh mục túi xách",
   image: "https://down-vn.img.susercontent.com/file/fa6ada2555e8e51f369718bbc92ccc52_tn"
 })
 
 Category.create({
   id: 10,
   category_name: "Sức khỏe",
-  decription: "Danh mục sức khỏe",
+  description: "Danh mục sức khỏe",
   image: "https://down-vn.img.susercontent.com/file/49119e891a44fa135f5f6f5fd4cfc747_tn"
 })
 
@@ -239,8 +239,6 @@ Seller.create({
 
 })
 
-
-
 /////////////////////////////////////////////
 
 // Thêm Product
@@ -256,21 +254,158 @@ Product.create({
   sellerId: 1,
 })
 
+Product.create({
+  id: 2,
+  product_name: "Đồng hồ",
+  description: "Đồng hồ vàng",
+  brand: "Thụy sĩ",
+  discount_value: 30000,
+  image: "https://lzd-img-global.slatic.net/g/p/bc9dc49231c13c51e0ebe413ee3f8fa2.jpg_720x720q80.jpg_.webp",
+  categoryId:4,
+  sellerId: 2,
+})
+
+Product.create({
+  id: 3,
+  product_name: "Túi xách",
+  description: "Túi xách trắng",
+  brand: "MIA",
+  discount_value: 40000,
+  image: "https://lzd-img-global.slatic.net/g/p/8cf9de5b55cc961e8556d857265185d1.jpg_720x720q80.jpg_.webp",
+  categoryId:9,
+  sellerId: 3,
+})
+
 
 /////////////////////////////////////////////
 
 // Thêm Product_detail
 
+Product_detail.create({
+  id: 1,
+  quantity: 10,
+  price: 100000,
+  image: "https://lzd-img-global.slatic.net/g/p/743b58b648ad42460bccc88a65dafb94.jpg_720x720q80.jpg_.webp",
+  productId: 1,
+  sizeId: 1,
+  colorId: 3, // trắng
+})
+
+
+Product_detail.create({
+  id: 2,
+  quantity: 20,
+  price: 200000,
+  image: "https://lzd-img-global.slatic.net/g/p/4b124b2a67fb4dc4a568be9436c0516c.jpg_720x720q80.jpg_.webp",
+  productId: 1,
+  sizeId: 2,
+  colorId: 2, // đen
+})
+
+
 /////////////////////////////////////////////
 
-
 // Thêm Người mua
+Buyer.create({
+  id: 1,
+  username: "buyer01",
+  password: "123456",
+  fullname: "Nguyễn Văn A",
+  email: "buy01@gmail.com",
+  phone_number: "0337510001",
+  address: "Hồ Chí Minh city",
+})
+
+Buyer.create({
+  id: 2,
+  username: "buyer02",
+  password: "123456",
+  fullname: "Nguyễn Văn B",
+  email: "buy02@gmail.com",
+  phone_number: "0337510002",
+  address: "Sài Gòn city",
+})
+
+
+Buyer.create({
+  id: 3,
+  username: "buyer03",
+  password: "123456",
+  fullname: "Nguyễn Văn C",
+  email: "buy03@gmail.com",
+  phone_number: "0337510003",
+  address: "Thủ Đức city",
+})
 
 /////////////////////////////////////////////
 // Thêm Voucher
-
+Voucher.create({
+  id: 1,
+  code: "VOUCHER01",
+  description: "khuyến mãi 01",
+  
+})
 
 ////////////////////////////////////////////
+
+// Thêm Order
+
+///////////////////////////////////////////
+
+
+// Thêm Livestream
+
+Livestream.create({
+  id: 1,
+  description: "Livestream 01",
+  title: "livestream num1",
+  userId_create: 1,
+  roomId: "",
+  start_time: "2023-07-24T08:46:48.733Z",
+  end_time: "2023-07-24T08:46:48.733Z",
+  thumbnail: "",
+})
+
+Livestream.create({
+  id: 2,
+  description: "Livestream 01",
+  title: "livestream num2",
+  userId_create: 2,
+  roomId: "",
+  start_time: "2023-07-24T08:46:48.733Z",
+  end_time: "2023-07-24T08:46:48.733Z",
+  thumbnail: "",
+})
+
+
+///////////////////////////////////////////
+// Thêm Livestream_Product
+
+Livestream_product.create({
+  id: 1,
+  order: 1,
+  expected_sell: 10,
+  productId: 1,
+  livestreamId: 1,
+
+})
+
+Livestream_product.create({
+  id: 2,
+  order: 2,
+  expected_sell: 20,
+  productId: 2,
+  livestreamId: 1,
+
+})
+
+
+
+
+/////////////////////////////////////////////
+
+
+
 
 
 }

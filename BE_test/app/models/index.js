@@ -56,7 +56,7 @@ db.product.belongsTo(db.seller,{
 
 db.seller.hasMany(db.product, {
   // foreignKey: "sellerId", as: 'products'
-  foreignKey: "sellerId", as: 'products'
+  foreignKey: "sellerId"
 });
 
 //
@@ -188,13 +188,12 @@ db.voucher.belongsToMany(db.order, {
 
 
 // Cart_details
-db.cart.belongsToMany(db.product, {
-  through: "cart_details", 
-})
-db.product.belongsToMany(db.cart, {
-  through: "cart_details",
-})
-
+// db.cart.belongsToMany(db.product, {
+//   through: "cart_details", 
+// })
+// db.product.belongsToMany(db.cart, {
+//   through: "cart_details",
+// })
 
 
 // Livestream_products
@@ -205,13 +204,24 @@ db.product.belongsToMany(db.livestream, {
   through: "livestream_products",
 })
 
+//Livestream_seller
+db.seller.hasMany(db.livestream,{
+  foreignKey: "sellerId"
+})
+
+db.livestream.belongsTo(db.seller, {
+  foreignKey: "sellerId"
+})
+
+
+
 // Like_share
-db.livestream.belongsToMany(db.buyer, {
-  through: "like_shares", 
-})
-db.buyer.belongsToMany(db.livestream, {
-  through: "like_shares",
-})
+// db.livestream.belongsToMany(db.buyer, {
+//   through: "like_shares", 
+// })
+// db.buyer.belongsToMany(db.livestream, {
+//   through: "like_shares",
+// })
 
 // View
 db.livestream.belongsToMany(db.buyer, {
@@ -231,12 +241,12 @@ db.seller.belongsToMany(db.buyer, {
 })
 
 // Chat
-db.buyer.belongsToMany(db.seller, {
-  through: 'chats'
-})
-db.seller.belongsToMany(db.buyer, {
-  through: 'chats'
-})
+// db.buyer.belongsToMany(db.seller, {
+//   through: 'chats'
+// })
+// db.seller.belongsToMany(db.buyer, {
+//   through: 'chats'
+// })
 
 
 

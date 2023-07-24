@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
         autoIncrement: true,
         allowNull: false,
       },
-      product_name: {
+      title: {
         type: DataTypes.STRING,
       },
       description: {
@@ -16,6 +16,9 @@ module.exports = (sequelize, DataTypes) => {
       },
       userId_create: {
         type: DataTypes.INTEGER,
+      },
+      roomId: {
+        type: DataTypes.STRING,
       },
       start_time: {
         type: DataTypes.DATE,
