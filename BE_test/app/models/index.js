@@ -16,242 +16,141 @@ const sequelize = new Sequelize(
     }
   }
 );
-
 const db = {};
+//------OK--------------//
+db.category = require("../models/category.js")(sequelize, DataTypes);
+db.product = require("../models/product.js")(sequelize, DataTypes);
+db.role = require("../models/role.js")(sequelize, DataTypes);
+db.user_role = require("../models/user_role.js")(sequelize, DataTypes);
+db.user = require("../models/user.js")(sequelize, DataTypes);
+db.store = require("../models/store.js")(sequelize, DataTypes);
+db.follow = require("../models/follow.js")(sequelize, DataTypes);
+
+db.cart = require("../models/cart.js")(sequelize, DataTypes);
+db.cart_product = require("../models/cart_product.js")(sequelize, DataTypes);
+db.feedback = require("../models/feedback.js")(sequelize, DataTypes);
+db.product_review = require("../models/product_review.js")(sequelize, DataTypes);
+
+db.order_voucher = require("../models/order_voucher.js")(sequelize, DataTypes);
+db.order = require("../models/order.js")(sequelize, DataTypes);
+db.voucher = require("../models/voucher.js")(sequelize, DataTypes);
+
+
+db.amount_discount = require("../models/amount_discount.js")(sequelize, DataTypes);
+db.percentage_discount = require("../models/percentage_discount.js")(sequelize, DataTypes);
+db.livestream = require("../models/livestream.js")(sequelize, DataTypes);
+db.livestream_product = require("../models/livestream_product.js")(sequelize, DataTypes);
+db.size = require("../models/size.js")(sequelize, DataTypes);
+db.color = require("../models/color.js")(sequelize, DataTypes);
+db.product_detail = require("../models/product_detail.js")(sequelize, DataTypes);
+db.notification = require("../models/notification.js")(sequelize, DataTypes);
+db.order_detail = require("../models/order_detail.js")(sequelize, DataTypes);
+/*
+// user - role (N->N) -> Tạo thêm bảng user_role
+- thiếu role và user_role
+// user - store (1->1) -> Tạo bảng store bỏ khóa userId vào làm khóa ngoại
+
+// // store-user (N->N) -> Tạo bảng follow
+- thiếu bảng follow
+/////////////////////////////
+// chưa thêm dữ liệu voucher
+// store-voucher (1->N): tạo bảng voucher và gắn storeId làm khóa ngoại.
+// cart - product (N->N) -> Tạo thêm bảng cart_product
+- thiếu cart và thiếu cart_product
+// user - cart (1->1) -> Tạo bảng cart thêm userId làm khóa ngoại
+// user - feedback (1->N) -> Tạo bảng feedback thêm userId làm khóa ngoại
+- thiếu bảng feedback
+// giống nhau
+// user - product_review (1->N) -> Tạo bảng product_review thêm userId làm khóa ngoại
+// product - product_review (1-> N) -> Tạo bảng product_review thêm productId làm khóa ngoại
+- thiếu bảng product_review
+// order - voucher (N-N) -> tạo bảng order_voucher
+- thiếu bảng order_voucher
+// livestream-product (N-N) -> Tạo bảng livestream-product
+- thiếu bảng livestream-product
+
+/*
+// product_detail (quan hệ cấp 3 giữa: Product-Size-Color)
+- thiếu bảng product_detail (nhớ thêm cái cài đặt index)
+*/
+
+//------OK----------------//
+/*
+
+//---------------------------//
+- Thêm dữ liệu:
+
+
+notification
+
+
+//-------------------------------------//
+Đã thêm:
+
+order_detail
+order_voucher
+order
+cart_product
+product_review
+
+feedback
+
+percentage_discount
+amount_discount
+user_role
+voucher
+livestream_product
+livestream
+
+follow
+user
+category
+role
+size
+store
+color
+product
+cart
+product_detail
+
+*/
+
+//--------------------//
 
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.user = require("../models/user.model.js")(sequelize, DataTypes);
-db.role = require("../models/role.model.js")(sequelize, DataTypes);
-db.order = require("../models/order.model.js")(sequelize, DataTypes);
-db.buyer = require("../models/buyer.model.js")(sequelize, DataTypes);
-db.seller = require("../models/seller.model.js")(sequelize, DataTypes);
-db.product = require("../models/product.model.js")(sequelize, DataTypes);
-db.livestream = require("../models/livestream.model.js")(sequelize, DataTypes);
-db.category = require("../models/category.model.js")(sequelize, DataTypes);
-db.size = require("../models/size.model.js")(sequelize, DataTypes);
-db.color = require("../models/color.model.js")(sequelize, DataTypes);
-db.productReview = require("../models/product-review.model.js")(sequelize, DataTypes);
-db.cart = require("../models/cart.model.js")(sequelize, DataTypes);
-db.admin = require("../models/admin.model.js")(sequelize, DataTypes);
-db.feedback = require("../models/feedback.model.js")(sequelize, DataTypes);
-db.order_detail = require("../models/order-detail.model.js")(sequelize, DataTypes);
-db.voucher = require("../models/voucher.model.js")(sequelize, DataTypes);
-db.cart_detail = require("../models/cart-detail.model.js")(sequelize, DataTypes);
-db.livestream_product = require("../models/livestream-product.model.js")(sequelize, DataTypes);
-db.like_share = require("../models/like-share.model.js")(sequelize, DataTypes);
-db.view = require("../models/view.model.js")(sequelize, DataTypes);
-db.chat = require("../models/chat.model.js")(sequelize, DataTypes);
-db.product_detail = require("../models/product-detail.model.js")(sequelize, DataTypes);
-// db.product_size = require("../models/product_size.model.js")(sequelize, DataTypes);
-// db.size_color = require("../models/size_color.model.js")(sequelize, DataTypes);
-
-// 
-
-// seller-products
-db.product.belongsTo(db.seller,{
-  foreignKey: "sellerId"
+const Product = db.product;
+const Category = db.category;
+const Role = db.role;
+const User = db.user;
+const Store = db.store;
+const Follow = db.follow;
+const Voucher = db.voucher;
+const Cart = db.cart;
+const Cart_product = db.cart_product;
+const Feedback = db.feedback;
+const Product_review = db.product_review;
+const Order_voucher = db.order_voucher;
+const Order = db.order;
+const Percentage_discount = db.percentage_discount;
+const Amount_discount = db.amount_discount;
+const Livestream = db.livestream;
+const Livestream_product = db.livestream_product;
+const Size = db.size;
+const Color = db.color;
+const Product_detail = db.product_detail;
+const Notification = db.notification;
+const Order_detail = db.order_detail;
+const User_role = db.user_role;
+Object.keys(db).forEach(index => {
+  if(db[index].associate){
+    db[index].associate({Product, Category, Role, User, Store, Follow, Cart, Cart_product, Feedback, Product_review, Order_voucher, Order, Percentage_discount, Amount_discount, Livestream, Livestream_product, Color, Size, Product_detail, Notification, Order_detail, User_role, Voucher});
+  }
 })
 
-db.seller.hasMany(db.product, {
-  // foreignKey: "sellerId", as: 'products'
-  foreignKey: "sellerId"
-});
-
-//
-db.cart.belongsTo(db.buyer,{
-  foreignKey: "buyerId"
-})
-
-db.buyer.hasOne(db.cart,{
-  // foreignKey: "buyerId", as: "carts"
-  foreignKey: "buyerId", 
-});
-
-// category-products
-db.product.belongsTo(db.category,{
-  foreignKey: "categoryId"
-})
-db.category.hasMany(db.product, {
-  // foreignKey: "categoryId", as: 'products'
-  foreignKey: "categoryId", 
-});
-
-//
-db.feedback.belongsTo(db.buyer,{
-  // foreignKey: "senderId", as: "buyers"
-  foreignKey: "senderId",
-})
-//db.buyer.hasMany(db.feedback);
-
-
-
-// Product detail
-// db.product_detail.belongsTo(db.product, {
-//   foreignKey: 'productId', as: 'products'
-// })
-// db.product.hasMany(db.product_detail);
-
-// db.product_detail.belongsTo(db.size, {
-//   foreignKey: 'sizeId', as: 'sizes'
-// })
-// db.product_detail.belongsTo(db.color, {
-//   foreignKey: 'colorId', as: 'colors'
-// })
-// db.size.hasMany(db.product_detail);
-// db.color.hasMany(db.product_detail);
-//
-
-// db.product.belongsToMany(db.size, {
-//   through: db.product_size
-// })
-
-// db.size.belongsToMany(db.product, {
-//   through: db.product_size
-// })
-
-// db.size.belongsToMany(db.color, {
-//   through: db.size_color
-// })
-// db.color.belongsToMany(db.size, {
-//   through: db.size_color
-// })
-
-// db.product.belongsToMany(db.color, {
-//   through: db.product_size
-// })
-// db.color.belongsToMany(db.product, {
-//   through: db.product_size
-// })
-
-// db.product.belongsToMany(db.size, {
-//   through: db.product_detail,
-//   foreignKey: 'productId'
-// })
-// db.size.belongsToMany(db.product, {
-//   through: db.product_detail,
-//   foreignKey: 'sizeId'
-// })
-
-// db.product.belongsToMany(db.color, {
-//   through: db.product_detail,
-//   foreignKey: 'productId'
-// })
-// db.color.belongsToMany(db.product, {
-//   through: db.product_detail,
-//   foreignKey: 'colorId'
-// })
-
-// db.size.belongsToMany(db.color, {
-//   through: db.product_detail,
-//   foreignKey: 'sizeId'
-// })
-// db.color.belongsToMany(db.size, {
-//   through: db.product_detail,
-//   foreignKey: 'colorId'
-// })
-
-
-
-
-// db.role.belongsToMany(db.user, {
-//   through: "user_roles"
-// });
-// db.user.belongsToMany(db.role, {
-//   through: "user_roles"
-// });
-
-
-// db.product.belongsToMany(db.buyer,{
-//   through: db.productReview
-// })
-// db.buyer.belongsToMany(db.product,{
-//   through: db.productReview
-// })
-
-// Order_detail
-// db.order.belongsToMany(db.product, {
-//   through: "order_details" 
-// })
-// db.product.belongsToMany(db.order, {
-//   through: "order_details" 
-// })
-
-// Order_vouchers
-db.order.belongsToMany(db.voucher, {
-  through: "order_vouchers", 
-})
-db.voucher.belongsToMany(db.order, {
-  through: "order_vouchers",
-})
-
-
-// Cart_details
-// db.cart.belongsToMany(db.product, {
-//   through: "cart_details", 
-// })
-// db.product.belongsToMany(db.cart, {
-//   through: "cart_details",
-// })
-
-
-// Livestream_products
-db.livestream.belongsToMany(db.product, {
-  through: "livestream_products", 
-})
-db.product.belongsToMany(db.livestream, {
-  through: "livestream_products",
-})
-
-//Livestream_seller
-db.seller.hasMany(db.livestream,{
-  foreignKey: "sellerId"
-})
-
-db.livestream.belongsTo(db.seller, {
-  foreignKey: "sellerId"
-})
-
-
-
-// Like_share
-// db.livestream.belongsToMany(db.buyer, {
-//   through: "like_shares", 
-// })
-// db.buyer.belongsToMany(db.livestream, {
-//   through: "like_shares",
-// })
-
-// View
-db.livestream.belongsToMany(db.buyer, {
-  through: "views", 
-})
-db.buyer.belongsToMany(db.livestream, {
-  through: "views",
-})
-
-// Follow
-
-db.buyer.belongsToMany(db.seller, {
-  through: 'follows'
-})
-db.seller.belongsToMany(db.buyer, {
-  through: 'follows'
-})
-
-// Chat
-// db.buyer.belongsToMany(db.seller, {
-//   through: 'chats'
-// })
-// db.seller.belongsToMany(db.buyer, {
-//   through: 'chats'
-// })
-
-
-
-
-
-db.ROLES = ["user", "admin", "moderator"];
+// db.ROLES = ["user", "admin", "moderator"];
 
 module.exports = db;
+
+

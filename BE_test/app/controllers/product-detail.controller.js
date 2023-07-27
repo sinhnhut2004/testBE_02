@@ -4,8 +4,6 @@ const Color = db.color;
 const Size = db.size;
 const productDetail = db.product_detail;
 
-console.log(Color);
-console.log(Size);
 
 const getAll = async (req, res) => {
   const getproductDetail = await productDetail.findAll();

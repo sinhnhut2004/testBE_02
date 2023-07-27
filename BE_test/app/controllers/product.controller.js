@@ -10,27 +10,28 @@ const getAll = async (req, res) => {
   const getProduct = await Product.findAll({
     include: [
       {
-        model: Seller,
-        as: "sellers",
-      },
-      {
+       
         model: Category,
-        as: "categories",
+        // as: "sellers",
       },
-      {
-        model: Size,
-        as: 'sizes'
+      
+      // {
+      //   model: Category,
+      //   as: "categories",
+      // },
+      // {
+      //   model: Size,
+      //   as: 'sizes'
         
-      },
-      {
-        model: Color,
-        as: 'colors'
+      // },
+      // {
+      //   model: Color,
+      //   as: 'colors'
         
-      },
+      // },
     ],
   });
 
-  console.log(getProduct[0].sizes);
   return res.status(201).json(getProduct);
 };
 
