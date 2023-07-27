@@ -66,6 +66,7 @@ app.use('/api/voucher', voucherRoute);
 
 // app.use('/api/category', categoryRoute);
 
+
 // routes
 require('./app/routes/auth.routes')(app);
 require('./app/routes/user.routes')(app);

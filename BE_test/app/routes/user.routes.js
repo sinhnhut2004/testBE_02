@@ -1,32 +1,14 @@
-const { authJwt } = require("../middleware");
-const controller = require("../controllers/user.controller");
+// const { authJwt } = require("../middleware");
+// const controller = require("../controllers/user.controller");
 
-module.exports = function(app) {
-  app.use(function(req, res, next) {
-    res.header(
-      "Access-Control-Allow-Headers",
-      "x-access-token, Origin, Content-Type, Accept"
-    );
-    next();
-  });
+const express = require('express');
+const router = express.Router();
+const userController = require('../controllers/user.controller');
+const authMiddleware = require('../middleware/authMiddleware');
 
-  app.get("/api/test/all", controller.allAccess);
+// Xác thực người dùng trước khi cho phép truy cập các tuyến đường này
+router.use(authMiddleware);
 
-  app.get(
-    "/api/test/user",
-    [authJwt.verifyToken],
-    controller.userBoard
-  );
+router.get('/profile', userController.getUserProfile);
 
-  app.get(
-    "/api/test/mod",
-    [authJwt.verifyToken, authJwt.isModerator],
-    controller.moderatorBoard
-  );
-
-  app.get(
-    "/api/test/admin",
-    [authJwt.verifyToken, authJwt.isAdmin],
-    controller.adminBoard
-  );
-};
+module.exports = router;
