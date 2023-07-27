@@ -11,42 +11,44 @@ app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 // database
-const db = require("./app/models");
-const buyerRoute = require("./app/routes/buyer.routes");
-const sellerRoute = require("./app/routes/seller.route");
-const productRoute = require("./app/routes/product.route");
-const voucherRoute = require("./app/routes/voucher.route");
-const colorRoute = require("./app/routes/color.route");
-const sizeRoute = require("./app/routes/size.route");
-const productDetailRoute = require("./app/routes/product-detail.route");
-const categoryRoute = require("./app/routes/category.route");
+const db = require("./models");
+const productRoute = require("./routes/product.route");
+const voucherRoute = require("./routes/voucher.route");
+const colorRoute = require("./routes/color.route");
+const sizeRoute = require("./routes/size.route");
+const productDetailRoute = require("./routes/product-detail.route");
+const categoryRoute = require("./routes/category.route");
 const { DataTypes } = require("sequelize");
 // const Admin = db.admin;
 // const Buyer = db.buyer;
 // const Cart_detail = db.cart_detail;
-const Category = db.category;
-const Product = db.product;
-const Role = db.role;
-const User = db.user;
-const Store = db.store;
-const Follow = db.follow;
-const Cart = db.cart;
-const Cart_product = db.cart_product;
-const Voucher = db.voucher;
-// const Chat = db.chat;
-const Color = db.color;
-const Feedback = db.feedback;
-const Size = db.size;
-const Product_detail = db.product_detail;
-const Livestream_product = db.livestream_product;
-const Livestream = db.livestream;
-const Order_detail = db.order_detail;
-const Order = db.order;
-const User_role = db.user_role;
-const Percentage_discount = db.percentage_discount;
-const Amount_discount = db.amount_discount;
-const Product_review = db.product_review;
-const Order_voucher = db.order_voucher;
+// const Category = db.category;
+// const Product = db.product;
+// const Role = db.role;
+// const User = db.user;
+// const Store = db.store;
+// const Follow = db.follow;
+// const Cart = db.cart;
+// const Cart_product = db.cart_product;
+// const Voucher = db.voucher;
+// // const Chat = db.chat;
+// const Color = db.color;
+// const Feedback = db.feedback;
+// const Size = db.size;
+// const Product_detail = db.product_detail;
+// const Livestream_product = db.livestream_product;
+// const Livestream = db.livestream;
+// const Order_detail = db.order_detail;
+// const Order = db.order;
+// const User_role = db.user_role;
+// const Percentage_discount = db.percentage_discount;
+// const Amount_discount = db.amount_discount;
+// const Product_review = db.product_review;
+// const Order_voucher = db.order_voucher;
+const {Category, Product, Role, User, Store, Follow, Cart, Cart_product, Admin,
+  Cart_detail, Voucher, Color, Feedback, Size, Product_detail, Livestream_product, Livestream, Order_detail, Order, User_role, Percentage_discount,
+Amount_discount, Product_review, Order_voucher} = require('./models');
+
 
 // const Like_share = db.like_share;
 // const View = db.view;   được hỗ trợ
@@ -67,12 +69,12 @@ app.use('/api/voucher', voucherRoute);
 // app.use('/api/category', categoryRoute);
 
 // routes
-require('./app/routes/auth.routes')(app);
-require('./app/routes/user.routes')(app);
+require('./routes/auth.routes')(app);
+require('./routes/user.routes')(app);
 
 
 // set port, listen for requests
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8081;
 
 db.sequelize.sync({ force: true }).then(() => {
   console.log("Hello");
@@ -414,7 +416,7 @@ Product.create({
   sellerId: 3,
 })
 
-// Thêm Cart_product
+//Thêm Cart_product
 Cart_product.create({
   id: 1,
   cartId: 4,
